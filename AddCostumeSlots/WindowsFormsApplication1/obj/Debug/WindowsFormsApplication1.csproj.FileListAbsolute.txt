@@ -1,0 +1,13 @@
+c:\users\ilir\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+c:\users\ilir\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+c:\users\ilir\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+c:\users\ilir\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
