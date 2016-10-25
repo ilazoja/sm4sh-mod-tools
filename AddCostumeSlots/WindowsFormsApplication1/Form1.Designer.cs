@@ -57,6 +57,7 @@
             this.model4 = new System.Windows.Forms.TextBox();
             this.eightPlayerModel = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.updateCharacterParam = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ModelFolder
@@ -118,6 +119,7 @@
             this.chr00.AllowDrop = true;
             this.chr00.Location = new System.Drawing.Point(303, 68);
             this.chr00.Name = "chr00";
+            this.chr00.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chr00.Size = new System.Drawing.Size(242, 20);
             this.chr00.TabIndex = 5;
             this.chr00.TextChanged += new System.EventHandler(this.chr00_TextChanged);
@@ -138,6 +140,7 @@
             this.chr11.AllowDrop = true;
             this.chr11.Location = new System.Drawing.Point(303, 111);
             this.chr11.Name = "chr11";
+            this.chr11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chr11.Size = new System.Drawing.Size(242, 20);
             this.chr11.TabIndex = 7;
             this.chr11.TextChanged += new System.EventHandler(this.chr11_TextChanged);
@@ -158,6 +161,7 @@
             this.chr13.AllowDrop = true;
             this.chr13.Location = new System.Drawing.Point(303, 154);
             this.chr13.Name = "chr13";
+            this.chr13.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chr13.Size = new System.Drawing.Size(242, 20);
             this.chr13.TabIndex = 9;
             this.chr13.TextChanged += new System.EventHandler(this.chr13_TextChanged);
@@ -178,6 +182,7 @@
             this.stock90.AllowDrop = true;
             this.stock90.Location = new System.Drawing.Point(303, 198);
             this.stock90.Name = "stock90";
+            this.stock90.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.stock90.Size = new System.Drawing.Size(242, 20);
             this.stock90.TabIndex = 11;
             this.stock90.TextChanged += new System.EventHandler(this.stock90_TextChanged);
@@ -233,6 +238,7 @@
             this.soundSE.AllowDrop = true;
             this.soundSE.Location = new System.Drawing.Point(15, 316);
             this.soundSE.Name = "soundSE";
+            this.soundSE.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.soundSE.Size = new System.Drawing.Size(118, 20);
             this.soundSE.TabIndex = 17;
             this.soundSE.DragDrop += new System.Windows.Forms.DragEventHandler(this.soundSE_DragDrop);
@@ -243,6 +249,7 @@
             this.soundVC.AllowDrop = true;
             this.soundVC.Location = new System.Drawing.Point(146, 316);
             this.soundVC.Name = "soundVC";
+            this.soundVC.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.soundVC.Size = new System.Drawing.Size(108, 20);
             this.soundVC.TabIndex = 18;
             this.soundVC.DragDrop += new System.Windows.Forms.DragEventHandler(this.soundVC_DragDrop);
@@ -295,8 +302,10 @@
             // 
             // model2
             // 
+            this.model2.AllowDrop = true;
             this.model2.Location = new System.Drawing.Point(13, 153);
             this.model2.Name = "model2";
+            this.model2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.model2.Size = new System.Drawing.Size(242, 20);
             this.model2.TabIndex = 24;
             this.model2.DragDrop += new System.Windows.Forms.DragEventHandler(this.model2_DragDrop);
@@ -304,8 +313,10 @@
             // 
             // model3
             // 
+            this.model3.AllowDrop = true;
             this.model3.Location = new System.Drawing.Point(13, 196);
             this.model3.Name = "model3";
+            this.model3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.model3.Size = new System.Drawing.Size(242, 20);
             this.model3.TabIndex = 25;
             this.model3.DragDrop += new System.Windows.Forms.DragEventHandler(this.model3_DragDrop);
@@ -313,8 +324,10 @@
             // 
             // model4
             // 
+            this.model4.AllowDrop = true;
             this.model4.Location = new System.Drawing.Point(13, 241);
             this.model4.Name = "model4";
+            this.model4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.model4.Size = new System.Drawing.Size(243, 20);
             this.model4.TabIndex = 26;
             this.model4.DragDrop += new System.Windows.Forms.DragEventHandler(this.model4_DragDrop);
@@ -322,8 +335,10 @@
             // 
             // eightPlayerModel
             // 
+            this.eightPlayerModel.AllowDrop = true;
             this.eightPlayerModel.Location = new System.Drawing.Point(13, 111);
             this.eightPlayerModel.Name = "eightPlayerModel";
+            this.eightPlayerModel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.eightPlayerModel.Size = new System.Drawing.Size(236, 20);
             this.eightPlayerModel.TabIndex = 27;
             this.eightPlayerModel.DragDrop += new System.Windows.Forms.DragEventHandler(this.eightPlayerModel_DragDrop);
@@ -338,11 +353,22 @@
             this.label14.TabIndex = 28;
             this.label14.Text = "8-Player Model";
             // 
+            // updateCharacterParam
+            // 
+            this.updateCharacterParam.Location = new System.Drawing.Point(12, 343);
+            this.updateCharacterParam.Name = "updateCharacterParam";
+            this.updateCharacterParam.Size = new System.Drawing.Size(136, 23);
+            this.updateCharacterParam.TabIndex = 29;
+            this.updateCharacterParam.Text = "Update ui_character_db";
+            this.updateCharacterParam.UseVisualStyleBackColor = true;
+            this.updateCharacterParam.Click += new System.EventHandler(this.updateCharacterParam_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 378);
+            this.Controls.Add(this.updateCharacterParam);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.eightPlayerModel);
             this.Controls.Add(this.model4);
@@ -410,6 +436,7 @@
         private System.Windows.Forms.TextBox model4;
         private System.Windows.Forms.TextBox eightPlayerModel;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button updateCharacterParam;
     }
 }
 
