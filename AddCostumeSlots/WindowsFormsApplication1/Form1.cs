@@ -204,13 +204,7 @@ namespace WindowsFormsApplication1
                 DirectoryCopy(subdir.FullName, temppath);
             }
         }
-
-        private void ModelFolder_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void WorkspaceDirectory_DragEnter(object sender, DragEventArgs e)
+        private void TB_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
@@ -222,7 +216,7 @@ namespace WindowsFormsApplication1
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
-            {
+            {                
                 Console.WriteLine(file);
                 WorkspaceDirectory.Text = file;
 
@@ -232,29 +226,17 @@ namespace WindowsFormsApplication1
             Properties.Settings.Default.Save();
         }
 
-        private void ModelFolder_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
-
         private void ModelFolder_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
             {
+                if (ModelFolder.Text.Length == 0)
+                    ModelFolder.Text = file;
+                else
+                    ModelFolder.AppendText("\r\n" + file);
                 Console.WriteLine(file);
-                ModelFolder.Text = file;
             }
-        }
-        private void chr00_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void chr00_DragDrop(object sender, DragEventArgs e)
@@ -263,16 +245,11 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                chr00.Text = file;
-                FindCharacter(chr00.Text);
+                if (chr00.Text.Length == 0)
+                    chr00.Text = file;
+                else
+                    chr00.AppendText("\r\n" + file);
             }
-        }
-        private void chr11_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void chr11_DragDrop(object sender, DragEventArgs e)
@@ -281,17 +258,12 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                chr11.Text = file;
-                FindCharacter(chr11.Text);
+                if (chr11.Text.Length == 0)
+                    chr11.Text = file;
+                else
+                    chr11.AppendText("\r\n" + file);
                 
             }
-        }
-        private void chr13_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void chr13_DragDrop(object sender, DragEventArgs e)
@@ -300,16 +272,11 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                chr13.Text = file;
-                FindCharacter(chr13.Text);
+                if (chr13.Text.Length == 0)
+                    chr13.Text = file;
+                else
+                    chr13.AppendText("\r\n" + file);
             }
-        }
-        private void stock90_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void stock90_DragDrop(object sender, DragEventArgs e)
@@ -318,32 +285,24 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                stock90.Text = file;
-                FindCharacter(stock90.Text);
+                if (stock90.Text.Length == 0)
+                    stock90.Text = file;
+                else
+                    stock90.AppendText("\r\n" + file);
             }
         }
-        private void soundSE_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
+
         private void soundSE_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                soundSE.Text = file;
+                if (soundSE.Text.Length == 0)
+                    soundSE.Text = file;
+                else
+                    soundSE.AppendText("\r\n" + file);
             }
-        }
-        private void soundVC_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void soundVC_DragDrop(object sender, DragEventArgs e)
@@ -352,16 +311,11 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                soundVC.Text = file;
+                if (soundVC.Text.Length == 0)
+                    soundVC.Text = file;
+                else
+                    soundVC.AppendText("\r\n" + file);
             }
-        }
-        private void model2_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-
         }
 
         private void model2_DragDrop(object sender, DragEventArgs e)
@@ -370,16 +324,11 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                model2.Text = file;
+                if (model2.Text.Length == 0)
+                    model2.Text = file;
+                else
+                    model2.AppendText("\r\n" + file);
             }
-        }
-
-        private void model3_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void model3_DragDrop(object sender, DragEventArgs e)
@@ -388,16 +337,11 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                model3.Text = file;
+                if (model3.Text.Length == 0)
+                    model3.Text = file;
+                else
+                    model3.AppendText("\r\n" + file);
             }
-        }
-
-        private void model4_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void model4_DragDrop(object sender, DragEventArgs e)
@@ -406,15 +350,11 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                model4.Text = file;
+                if (model4.Text.Length == 0)
+                    model4.Text = file;
+                else
+                    model4.AppendText("\r\n" + file);
             }
-        }
-        private void eightPlayerModel_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
         }
 
         private void eightPlayerModel_DragDrop(object sender, DragEventArgs e)
@@ -423,38 +363,78 @@ namespace WindowsFormsApplication1
             foreach (string file in files)
             {
                 Console.WriteLine(file);
-                eightPlayerModel.Text = file;
+                if (eightPlayerModel.Text.Length == 0)
+                    eightPlayerModel.Text = file;
+                else
+                    eightPlayerModel.AppendText("\r\n" + file);
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void QuickDrop_DragDrop(object sender, DragEventArgs e)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+            {
+                if (file.IndexOf("chr_00") != -1)
+                {
+                    if (chr00.Text.Length == 0)
+                        chr00.Text = file;
+                    else
+                        chr00.AppendText("\r\n" + file);
+                    Console.WriteLine(file);
+                }
+                else if (file.IndexOf("chr_11") != -1)
+                {
+                    if (chr11.Text.Length == 0)
+                        chr11.Text = file;
+                    else
+                        chr11.AppendText("\r\n" + file);
+                    Console.WriteLine(file);
+                }
+                else if (file.IndexOf("chr_13") != -1)
+                {
+                    if (chr13.Text.Length == 0)
+                        chr13.Text = file;
+                    else
+                        chr13.AppendText("\r\n" + file);
+                    Console.WriteLine(file);
+                }
+                else if (file.IndexOf("stock_90") != -1)
+                {
+                    if (stock90.Text.Length == 0)
+                        stock90.Text = file;
+                    else
+                        stock90.AppendText("\r\n" + file);
+                    Console.WriteLine(file);
+                }
+                else
+                {
+                    if (ModelFolder.Text.Length == 0)
+                        ModelFolder.Text = file;
+                    else
+                        ModelFolder.AppendText("\r\n" + file);
+                    Console.WriteLine(file);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MoveToDirectory(ModelFolder.Text, 1);
-            MoveToDirectory(chr00.Text, 0);
-            MoveToDirectory(chr11.Text, 0);
-            MoveToDirectory(chr13.Text, 0);
-            MoveToDirectory(stock90.Text, 0);
-            MoveToDirectory(soundSE.Text, 5);
-            MoveToDirectory(soundVC.Text, 5);
-            MoveToDirectory(model2.Text, 12);
-            MoveToDirectory(model3.Text, 13);
-            MoveToDirectory(model4.Text, 14);
-            MoveToDirectory(eightPlayerModel.Text, 8);
+            for (int i = 0; i < ModelFolder.Lines.Length; i++)
+            {
+                FindCharacter(i);
+                MoveToDirectory(ModelFolder.Lines[i], 1);
+                MoveToDirectory(chr00.Lines[i], 0);
+                MoveToDirectory(chr11.Lines[i], 0);
+                MoveToDirectory(chr13.Lines[i], 0);
+                MoveToDirectory(stock90.Lines[i], 0);
+                if (i < soundSE.Lines.Length) MoveToDirectory(soundSE.Lines[i], 5);
+                if (i < soundVC.Lines.Length) MoveToDirectory(soundVC.Lines[i], 5);
+                if (i < model2.Lines.Length) MoveToDirectory(model2.Lines[i], 12);
+                if (i < model3.Lines.Length) MoveToDirectory(model3.Lines[i], 13);
+                if (i < model4.Lines.Length) MoveToDirectory(model4.Lines[i], 14);
+                if (i < eightPlayerModel.Lines.Length) MoveToDirectory(eightPlayerModel.Lines[i], 8);
+            }
             ModelFolder.Text = "";
             chr00.Text = "";
             chr11.Text = "";
@@ -466,7 +446,6 @@ namespace WindowsFormsApplication1
             model3.Text = "";
             model4.Text = "";
             eightPlayerModel.Text = "";
-
         }
         private void MoveToDirectory(string fileLocation, int fileType)
         {
@@ -587,13 +566,22 @@ namespace WindowsFormsApplication1
             {
                 manualInput = true;
             }
+            else manualInput = false;
+
         }
 
-        private void FindCharacter(string uiName)
+        private void FindCharacter(int i)
         {
+            string uiName = "";
+
+            if (i < chr00.Lines.Length) uiName = chr00.Lines[i];
+            if (i < chr11.Lines.Length) uiName = chr11.Lines[i];
+            if (i < chr13.Lines.Length) uiName = chr13.Lines[i];
+            if (i < stock90.Lines.Length) uiName = chr13.Lines[i];
+
             string[] line = uiName.Split("_".ToCharArray());
-            character = line[3];
-            characterLabel.Text = line[3];
+            character = line[line.Length - 2];
+            characterLabel.Text = character;
             switch (character)
             {
                 case "Drmario":
@@ -661,26 +649,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void chr00_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chr11_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chr13_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stock90_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void updateCharacterParam_Click(object sender, EventArgs e)
         {
 
@@ -715,85 +683,179 @@ namespace WindowsFormsApplication1
                 }   */
         }
 
-       /* private void openParam(string fileName, out long[] characterParams, out long[] characterParamType, out long characterNumber)
+        private void TB_KeyDown(object sender, KeyEventArgs e)
         {
-            using (BinaryReader f = new BinaryReader(File.Open(fileName, FileMode.Open)))
-            {
-                long entryNums = 0;
-                List<long> entries = new List<long>();
-                List<long> entryType = new List<long>();
-
-                f.BaseStream.Seek(8, SeekOrigin.Begin);
-                var fr = f.ReadByte();
-                Console.WriteLine(fr);
-                if (fr == 0x20)
-                {
-                    entryNums = StringToInt(f.ReadBytes(4));
-                    byte temp = 0;
-                    while (f.BaseStream.Position != f.BaseStream.Length)
-                    {
-                        temp = f.ReadByte();
-                        if (f.BaseStream.Position != f.BaseStream.Length)
-                        {
-                            var typeCode = temp; //typeCode
-                            entryType.Add(typeCode);
-                            if (typeCode == 0x1) //type is 8 bit int (unsigned)
-                            {
-                                entryType.Add(StringToInt(f.ReadBytes(1)));
-                            }
-                            if (typeCode == 0x2) //type is 8 bit int (signed)
-                            {
-                                entryType.Add(HexInt(f.ReadBytes(1)));
-                            }
-                            if (typeCode == 0x3) //type is 16 bit int (unsigned)
-                            {
-                                entryType.Add(StringToInt(f.ReadBytes(2)));
-                            }
-                            if (typeCode == 0x4) //type is 16 bit int (signed)
-                            {
-                                entryType.Add(HexInt(f.ReadBytes(2)));
-                            }
-                            if (typeCode == 0x5) //type is 32 bit int (unsigned)
-                            {
-                                entryType.Add(StringToInt(f.ReadBytes(3)));
-                            }
-                            if (typeCode == 0x6) //type is 32 bit int (signed)
-                            {
-                                entryType.Add(HexInt(f.ReadBytes(3)));
-                            }
-                            if (typeCode == 0x7) //type is 32 bit float
-                            {
-                                entryType.Add(StringToInt(f.ReadBytes(3)));
-                            }
-                        }
-                        
-
-                    }
-                }
-                characterParams = entries.ToArray();
-                characterParamType = entryType.ToArray();
-                characterNumber = entryNums;
-            }
-            
+            TextBox textbox = (TextBox)sender;
+            if (e.Control && e.KeyCode == Keys.A) textbox.SelectAll();
         }
 
-        private long StringToInt(byte[] s)
+
+        private void TB_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int current = 0;
-            foreach (byte c in s)
-            {
-                current = (current * 256) + c;
-            }
-            return current;
+            TextBox textbox = (TextBox)sender;
+
+            //Get character positions for the current line
+            int firstCharPosition = textbox.GetFirstCharIndexOfCurrentLine();
+            int lineNumber = textbox.GetLineFromCharIndex(firstCharPosition);
+            int lastCharPosition = textbox.GetFirstCharIndexFromLine(lineNumber + 1);
+            if (lastCharPosition == -1) lastCharPosition = textbox.TextLength;
+
+            textbox.SelectionStart = firstCharPosition;
+            textbox.SelectionLength = lastCharPosition - firstCharPosition;
         }
-        private long HexInt(byte[] s)
+
+        private void CreateTextboxToolTip(object sender, TextBox textbox)
         {
-            string hex = BitConverter.ToString(s);
-            hex = hex.Replace("-", "");
-            long x = long.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-            if (x > 0x7FFFFFFF) x -= 0x100000000;
-            return x;
-        }*/
+            Label L = (Label)sender;
+            int VisibleTime = 1000;  //in milliseconds
+
+            ToolTip tt = new ToolTip();
+            tt.Show("Number of entries: " + textbox.Lines.Length + "\r\n" + textbox.Text, L, 0, 10, VisibleTime);
+        }
+
+        private void label2_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, ModelFolder);
+        }
+
+        private void label3_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, chr00);
+        }
+
+        private void label14_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, eightPlayerModel);
+        }
+
+        private void label4_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, chr11);
+        }
+
+        private void label11_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, model2);
+        }
+
+        private void label5_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, chr13);
+        }
+
+        private void label12_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, model3);
+        }
+
+        private void label6_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, stock90);
+        }
+
+        private void label13_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, model4);
+        }
+
+        private void label9_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, soundSE);
+        }
+
+        private void label10_MouseHover(object sender, EventArgs e)
+        {
+            CreateTextboxToolTip(sender, soundVC);
+        }
+
+        private void label15_MouseHover(object sender, EventArgs e)
+        {
+            Label L = (Label)sender;
+            int VisibleTime = 1000;  //in milliseconds
+
+            ToolTip tt = new ToolTip();
+            tt.Show("Drag and drop modelFolder, chr_00, chr_11, chr_13 and stock_90", L, 0, 10, VisibleTime);
+        }
+
+        /* private void openParam(string fileName, out long[] characterParams, out long[] characterParamType, out long characterNumber)
+         {
+             using (BinaryReader f = new BinaryReader(File.Open(fileName, FileMode.Open)))
+             {
+                 long entryNums = 0;
+                 List<long> entries = new List<long>();
+                 List<long> entryType = new List<long>();
+
+                 f.BaseStream.Seek(8, SeekOrigin.Begin);
+                 var fr = f.ReadByte();
+                 Console.WriteLine(fr);
+                 if (fr == 0x20)
+                 {
+                     entryNums = StringToInt(f.ReadBytes(4));
+                     byte temp = 0;
+                     while (f.BaseStream.Position != f.BaseStream.Length)
+                     {
+                         temp = f.ReadByte();
+                         if (f.BaseStream.Position != f.BaseStream.Length)
+                         {
+                             var typeCode = temp; //typeCode
+                             entryType.Add(typeCode);
+                             if (typeCode == 0x1) //type is 8 bit int (unsigned)
+                             {
+                                 entryType.Add(StringToInt(f.ReadBytes(1)));
+                             }
+                             if (typeCode == 0x2) //type is 8 bit int (signed)
+                             {
+                                 entryType.Add(HexInt(f.ReadBytes(1)));
+                             }
+                             if (typeCode == 0x3) //type is 16 bit int (unsigned)
+                             {
+                                 entryType.Add(StringToInt(f.ReadBytes(2)));
+                             }
+                             if (typeCode == 0x4) //type is 16 bit int (signed)
+                             {
+                                 entryType.Add(HexInt(f.ReadBytes(2)));
+                             }
+                             if (typeCode == 0x5) //type is 32 bit int (unsigned)
+                             {
+                                 entryType.Add(StringToInt(f.ReadBytes(3)));
+                             }
+                             if (typeCode == 0x6) //type is 32 bit int (signed)
+                             {
+                                 entryType.Add(HexInt(f.ReadBytes(3)));
+                             }
+                             if (typeCode == 0x7) //type is 32 bit float
+                             {
+                                 entryType.Add(StringToInt(f.ReadBytes(3)));
+                             }
+                         }
+
+
+                     }
+                 }
+                 characterParams = entries.ToArray();
+                 characterParamType = entryType.ToArray();
+                 characterNumber = entryNums;
+             }
+
+         }
+
+         private long StringToInt(byte[] s)
+         {
+             int current = 0;
+             foreach (byte c in s)
+             {
+                 current = (current * 256) + c;
+             }
+             return current;
+         }
+         private long HexInt(byte[] s)
+         {
+             string hex = BitConverter.ToString(s);
+             hex = hex.Replace("-", "");
+             long x = long.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+             if (x > 0x7FFFFFFF) x -= 0x100000000;
+             return x;
+         }*/
     }
 }
 
