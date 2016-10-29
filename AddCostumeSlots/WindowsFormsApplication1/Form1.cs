@@ -414,13 +414,10 @@ namespace WindowsFormsApplication1
 
         private int IsModelFolder (string name)
         {
-            int number = 0;
             string firstLetter = name[0].ToString();
-            string digits = name[1].ToString() + name[2].ToString();
-            bool result = int.TryParse(digits, out number);
 
-            if (firstLetter == "c" && result) return 1;
-            else if (firstLetter == "l" && result) return 2;
+            if (firstLetter == "c" && name.Length <= 3 && name != "chr") return 1;
+            else if (firstLetter == "l" && name.Length <= 3 && name != "chr") return 2;
             else return 0;
         }
 
@@ -437,13 +434,13 @@ namespace WindowsFormsApplication1
             }
             foreach (FileInfo f in files)
             {
-                if (f.Name.ToLower().IndexOf("chr_00") != -1)
+                if (f.Name.ToLower().IndexOf("chr_00") != -1 && f.Name.ToLower().IndexOf(".nut") != -1)
                     WriteToTextbox(chr00, f.FullName);
-                else if (f.Name.ToLower().IndexOf("chr_11") != -1)
+                else if (f.Name.ToLower().IndexOf("chr_11") != -1 && f.Name.ToLower().IndexOf(".nut") != -1)
                     WriteToTextbox(chr11, f.FullName);
-                else if (f.Name.ToLower().IndexOf("chr_13") != -1)
+                else if (f.Name.ToLower().IndexOf("chr_13") != -1 && f.Name.ToLower().IndexOf(".nut") != -1)
                     WriteToTextbox(chr13, f.FullName);
-                else if (f.Name.ToLower().IndexOf("stock_90") != -1)
+                else if (f.Name.ToLower().IndexOf("stock_90") != -1 && f.Name.ToLower().IndexOf(".nut") != -1)
                     WriteToTextbox(stock90, f.FullName);
                 else if (f.Name.ToLower().IndexOf("vc") != -1)
                     WriteToTextbox(soundVC, f.FullName);
