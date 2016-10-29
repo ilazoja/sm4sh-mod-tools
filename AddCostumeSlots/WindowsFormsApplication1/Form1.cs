@@ -49,7 +49,6 @@ namespace WindowsFormsApplication1
 
         string character;
         int costumeNumber;
-        int numberInput = 0;
         bool manualInput = false;
         int totalAddedCostumes = 0;
 
@@ -169,16 +168,9 @@ namespace WindowsFormsApplication1
             WorkspaceDirectory.Text = Properties.Settings.Default.SavedSetting1;
             directory = Properties.Settings.Default.SavedSetting1;
             this.AllowDrop = true;
-            if (WorkspaceDirectory.Text != "")
-            {
-                string targetPath = "";
-                foreach (Character c in Characters)
-                {
-                    targetPath = directory + c.characterDir + @"model\body";
-                    totalAddedCostumes = totalAddedCostumes + GetCostumeNumber(targetPath) - 8;
-                    characterLabel.Text = totalAddedCostumes.ToString();
-                }
-            }
+            FindTotalAddedCostumes();
+
+
 
             // this.DragEnter += new DragEventHandler(ModelFolder_DragEnter);
             //this.DragDrop += new DragEventHandler(ModelFolder_DragDrop);
@@ -195,6 +187,18 @@ namespace WindowsFormsApplication1
 
                  else PlaceInDirectory(file);
              }*/
+        }
+
+        private void FindTotalAddedCostumes()
+        {
+            if (WorkspaceDirectory.Text.IndexOf("workspace") == -1) return;
+            string targetPath = "";
+            foreach (Character c in Characters)
+            {
+                targetPath = directory + c.characterDir + @"model\body";
+                totalAddedCostumes = totalAddedCostumes + GetCostumeNumber(targetPath) - 8;
+                characterLabel.Text = totalAddedCostumes.ToString();
+            }
         }
         void DirectoryCopy(string file, string targetPath)
         {
@@ -236,13 +240,7 @@ namespace WindowsFormsApplication1
             }
             Properties.Settings.Default.SavedSetting1 = directory;
             Properties.Settings.Default.Save();
-            string targetPath = "";
-            foreach (Character c in Characters)
-            {
-                targetPath = directory + c.characterDir + @"model\body";
-                totalAddedCostumes = totalAddedCostumes + GetCostumeNumber(targetPath) - 8;
-                characterLabel.Text = totalAddedCostumes.ToString();
-            }
+            FindTotalAddedCostumes();
         }
 
         private void ModelFolder_DragDrop(object sender, DragEventArgs e)
@@ -265,9 +263,27 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine(file);
                 if (chr00.Text.Length == 0)
-                    chr00.Text = file;
-                else
-                    chr00.AppendText("\r\n" + file);
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr00.Text = filesInFolder[0].FullName;
+                        }
+                        else
+                            chr00.Text = file;
+                    }
+                    else
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr00.AppendText("\r\n" + filesInFolder[0].FullName);
+                        }
+                        else
+                            chr00.AppendText("\r\n" + file);
+                    }
             }
         }
 
@@ -278,10 +294,28 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine(file);
                 if (chr11.Text.Length == 0)
-                    chr11.Text = file;
+                {
+                    if (file.IndexOf(".nut") == -1)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(file);
+                        FileInfo[] filesInFolder = dir.GetFiles();
+                        chr11.Text = filesInFolder[0].FullName;
+                    }
+                    else
+                        chr11.Text = file;
+                }
                 else
-                    chr11.AppendText("\r\n" + file);
-                
+                {
+                    if (file.IndexOf(".nut") == -1)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(file);
+                        FileInfo[] filesInFolder = dir.GetFiles();
+                        chr11.AppendText("\r\n" + filesInFolder[0].FullName);
+                    }
+                    else
+                        chr11.AppendText("\r\n" + file);
+                }
+
             }
         }
 
@@ -292,9 +326,27 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine(file);
                 if (chr13.Text.Length == 0)
-                    chr13.Text = file;
+                {
+                    if (file.IndexOf(".nut") == -1)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(file);
+                        FileInfo[] filesInFolder = dir.GetFiles();
+                        chr13.Text = filesInFolder[0].FullName;
+                    }
+                    else
+                        chr13.Text = file;
+                }
                 else
-                    chr13.AppendText("\r\n" + file);
+                {
+                    if (file.IndexOf(".nut") == -1)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(file);
+                        FileInfo[] filesInFolder = dir.GetFiles();
+                        chr13.AppendText("\r\n" + filesInFolder[0].FullName);
+                    }
+                    else
+                        chr13.AppendText("\r\n" + file);
+                }
             }
         }
 
@@ -305,9 +357,27 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine(file);
                 if (stock90.Text.Length == 0)
-                    stock90.Text = file;
+                {
+                    if (file.IndexOf(".nut") == -1)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(file);
+                        FileInfo[] filesInFolder = dir.GetFiles();
+                        stock90.Text = filesInFolder[0].FullName;
+                    }
+                    else
+                        stock90.Text = file;
+                }
                 else
-                    stock90.AppendText("\r\n" + file);
+                {
+                    if (file.IndexOf(".nut") == -1)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(file);
+                        FileInfo[] filesInFolder = dir.GetFiles();
+                        stock90.AppendText("\r\n" + filesInFolder[0].FullName);
+                    }
+                    else
+                        stock90.AppendText("\r\n" + file);
+                }
             }
         }
 
@@ -394,36 +464,108 @@ namespace WindowsFormsApplication1
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
             {
-                if (file.IndexOf("chr_00") != -1)
+                if (file.ToLower().IndexOf("chr_00") != -1)
                 {
                     if (chr00.Text.Length == 0)
-                        chr00.Text = file;
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr00.Text = filesInFolder[0].FullName;
+                        }
+                        else
+                            chr00.Text = file;
+                    }
                     else
-                        chr00.AppendText("\r\n" + file);
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr00.AppendText("\r\n" + filesInFolder[0].FullName);
+                        }
+                        else
+                            chr00.AppendText("\r\n" + file);
+                    }
                     Console.WriteLine(file);
                 }
-                else if (file.IndexOf("chr_11") != -1)
+                else if (file.ToLower().IndexOf("chr_11") != -1)
                 {
                     if (chr11.Text.Length == 0)
-                        chr11.Text = file;
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr11.Text = filesInFolder[0].FullName;
+                        }
+                        else
+                            chr11.Text = file;
+                    }
                     else
-                        chr11.AppendText("\r\n" + file);
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr11.AppendText("\r\n" + filesInFolder[0].FullName);
+                        }
+                        else
+                            chr11.AppendText("\r\n" + file);
+                    }
                     Console.WriteLine(file);
                 }
-                else if (file.IndexOf("chr_13") != -1)
+                else if (file.ToLower().IndexOf("chr_13") != -1)
                 {
                     if (chr13.Text.Length == 0)
-                        chr13.Text = file;
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr13.Text = filesInFolder[0].FullName;
+                        }
+                        else
+                            chr13.Text = file;
+                    }
                     else
-                        chr13.AppendText("\r\n" + file);
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            chr13.AppendText("\r\n" + filesInFolder[0].FullName);
+                        }
+                        else
+                            chr13.AppendText("\r\n" + file);
+                    }
                     Console.WriteLine(file);
                 }
-                else if (file.IndexOf("stock_90") != -1)
+                else if (file.ToLower().IndexOf("stock_90") != -1)
                 {
                     if (stock90.Text.Length == 0)
-                        stock90.Text = file;
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            stock90.Text = filesInFolder[0].FullName;
+                        }
+                        else
+                            stock90.Text = file;
+                    }
                     else
-                        stock90.AppendText("\r\n" + file);
+                    {
+                        if (file.IndexOf(".nut") == -1)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(file);
+                            FileInfo[] filesInFolder = dir.GetFiles();
+                            stock90.AppendText("\r\n" + filesInFolder[0].FullName);
+                        }
+                        else
+                            stock90.AppendText("\r\n" + file);
+                    }
                     Console.WriteLine(file);
                 }
                 else
@@ -439,9 +581,9 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (WorkspaceDirectory.Text == "")
+            if (WorkspaceDirectory.Text.IndexOf("workspace") == -1)
             {
-                MessageBox.Show(@"Please drag Sm4shExplorer workspace directory to Directory", "Missing Workspace Directory",
+                MessageBox.Show(@"Please drag Sm4shExplorer workspace directory to Directory", "Missing/Incorrect Workspace Directory",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -519,17 +661,28 @@ namespace WindowsFormsApplication1
                     case 12:
                         if (currentCharacter.model2 == "N/A") return;
                         targetPath = targetPath + currentCharacter.model2;
+                        letter = @"\c";
+                        if (costumeNumber < 10) zero = "0";
+                        targetPath = targetPath + letter + zero + costumeNumber.ToString();
+                        DirectoryCopy(fileLocation, targetPath);
                         break;
                     case 13:
                         if (currentCharacter.model3 == "N/A") return;
                         targetPath = targetPath + currentCharacter.model3;
+                        letter = @"\c";
+                        if (costumeNumber < 10) zero = "0";
+                        targetPath = targetPath + letter + zero + costumeNumber.ToString();
+                        DirectoryCopy(fileLocation, targetPath);
                         break;
                     case 14:
                         if (currentCharacter.model4 == "N/A") return;
                         targetPath = targetPath + currentCharacter.model4;
+                        letter = @"\c";
+                        if (costumeNumber < 10) zero = "0";
+                        targetPath = targetPath + letter + zero + costumeNumber.ToString();
+                        DirectoryCopy(fileLocation, targetPath);
                         break;
                     default:
-                        costumeNumber = numberInput;
                         break;
                 }
                 Console.WriteLine(targetPath);
@@ -592,6 +745,7 @@ namespace WindowsFormsApplication1
             if (int.TryParse(costumeNum.Text, out numberInput) == true)
             {
                 manualInput = true;
+                costumeNumber = numberInput;
             }
             else manualInput = false;
 
