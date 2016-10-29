@@ -226,20 +226,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(314, 316);
+            this.label7.Location = new System.Drawing.Point(269, 316);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.Size = new System.Drawing.Size(117, 13);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Character:";
+            this.label7.Text = "Total Added Costumes:";
             // 
             // characterLabel
             // 
             this.characterLabel.AutoSize = true;
-            this.characterLabel.Location = new System.Drawing.Point(367, 316);
+            this.characterLabel.Location = new System.Drawing.Point(383, 316);
             this.characterLabel.Name = "characterLabel";
             this.characterLabel.Size = new System.Drawing.Size(13, 13);
             this.characterLabel.TabIndex = 14;
-            this.characterLabel.Text = "?";
+            this.characterLabel.Text = "0";
             // 
             // label8
             // 

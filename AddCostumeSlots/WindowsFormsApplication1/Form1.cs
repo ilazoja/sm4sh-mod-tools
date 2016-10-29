@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
-using IronPython.Runtime;
+//using IronPython.Hosting;
+//using Microsoft.Scripting.Hosting;
+//using IronPython.Runtime;
 
 namespace WindowsFormsApplication1
 {
@@ -51,6 +51,7 @@ namespace WindowsFormsApplication1
         int costumeNumber;
         int numberInput = 0;
         bool manualInput = false;
+        int totalAddedCostumes = 0;
 
         public Form1()
         {
@@ -168,6 +169,17 @@ namespace WindowsFormsApplication1
             WorkspaceDirectory.Text = Properties.Settings.Default.SavedSetting1;
             directory = Properties.Settings.Default.SavedSetting1;
             this.AllowDrop = true;
+            if (WorkspaceDirectory.Text != "")
+            {
+                string targetPath = "";
+                foreach (Character c in Characters)
+                {
+                    targetPath = directory + c.characterDir + @"model\body";
+                    totalAddedCostumes = totalAddedCostumes + GetCostumeNumber(targetPath) - 8;
+                    characterLabel.Text = totalAddedCostumes.ToString();
+                }
+            }
+
             // this.DragEnter += new DragEventHandler(ModelFolder_DragEnter);
             //this.DragDrop += new DragEventHandler(ModelFolder_DragDrop);
 
@@ -224,6 +236,13 @@ namespace WindowsFormsApplication1
             }
             Properties.Settings.Default.SavedSetting1 = directory;
             Properties.Settings.Default.Save();
+            string targetPath = "";
+            foreach (Character c in Characters)
+            {
+                targetPath = directory + c.characterDir + @"model\body";
+                totalAddedCostumes = totalAddedCostumes + GetCostumeNumber(targetPath) - 8;
+                characterLabel.Text = totalAddedCostumes.ToString();
+            }
         }
 
         private void ModelFolder_DragDrop(object sender, DragEventArgs e)
@@ -420,6 +439,12 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (WorkspaceDirectory.Text == "")
+            {
+                MessageBox.Show(@"Please drag Sm4shExplorer workspace directory to Directory", "Missing Workspace Directory",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             for (int i = 0; i < ModelFolder.Lines.Length; i++)
             {
                 FindCharacter(i);
@@ -434,6 +459,8 @@ namespace WindowsFormsApplication1
                 if (i < model3.Lines.Length) MoveToDirectory(model3.Lines[i], 13);
                 if (i < model4.Lines.Length) MoveToDirectory(model4.Lines[i], 14);
                 if (i < eightPlayerModel.Lines.Length) MoveToDirectory(eightPlayerModel.Lines[i], 8);
+                totalAddedCostumes++;
+                characterLabel.Text = totalAddedCostumes.ToString();
             }
             ModelFolder.Text = "";
             chr00.Text = "";
@@ -581,7 +608,7 @@ namespace WindowsFormsApplication1
 
             string[] line = uiName.Split("_".ToCharArray());
             character = line[line.Length - 2];
-            characterLabel.Text = character;
+            /*characterLabel.Text = character;
             switch (character)
             {
                 case "Drmario":
@@ -638,7 +665,7 @@ namespace WindowsFormsApplication1
                     //Pitb add option?
                     //Littlemac: Add hoodie option?
                     //Gamewatch Fix later
-            }
+            }*/
             foreach (Character c in Characters)
             {
                 if (c.name == character)
@@ -651,12 +678,29 @@ namespace WindowsFormsApplication1
 
         private void updateCharacterParam_Click(object sender, EventArgs e)
         {
+            if (WorkspaceDirectory.Text == "")
+            {
+                MessageBox.Show(@"Please drag Sm4shExplorer workspace directory to Directory", "Missing Workspace Directory",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            updateCharacterParam.Enabled = false;
 
             int totalCostumes = 0;
             string targetPath = "";
-            var engine = Python.CreateEngine();
+            foreach (Character c in Characters)
+            {
+                targetPath = directory + c.characterDir + @"model\body";
+                totalCostumes = GetCostumeNumber(targetPath);
+                if (!modifyUICharacterDB(c.cID + 1, totalCostumes)) break;
+            }
+
+            updateCharacterParam.Enabled = true;
+
+
+            /*var engine = Python.CreateEngine();
             dynamic scope = engine.CreateScope();
-            engine.ExecuteFile(@"C:\Ilir\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\AddCostumeSlots\UpdateCostumeNumber.py", scope);
+            engine.ExecuteFile(@"C:\_______\Games\WooU\Mod\Title\vol\content\Sm4shBundle\Sm4shExplorer\V0.07.1\AddCostumeSlots\UpdateCostumeNumber.py", scope);
             foreach (Character c in Characters)
             {
                 targetPath = directory + c.characterDir + @"model\body";
@@ -667,6 +711,8 @@ namespace WindowsFormsApplication1
             Console.WriteLine("done");
             System.Diagnostics.Process.Start(Application.ExecutablePath); // to start new instance of application
             this.Close(); //to turn off current app
+            */
+
 
             /* string cPath = ",";
              long[] characterParams;
@@ -681,6 +727,48 @@ namespace WindowsFormsApplication1
                {
 
                 }   */
+        }
+
+        public bool modifyUICharacterDB(int characterposition, int value)
+        {
+            Stream stream = null;
+            try
+            {
+                stream = File.Open(directory + @"\content\patch\data(us_en)\param\ui\ui_character_db.bin", FileMode.Open);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(@"Cannot find ui_character_db.bin in \content\patch\data(us_en)\param\ui\ui_character_db.bin", "Missing ui_character_db.bin",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            using (BinaryReader br = new BinaryReader(stream))
+           {
+               long pose = 13 + (127 * characterposition) + 26;
+               Console.WriteLine(characterposition);
+               stream.Seek(pose, SeekOrigin.Begin);
+               int bit = br.ReadByte();
+               switch (bit)
+               {
+                   case 2:
+                       stream.WriteByte(BitConverter.GetBytes(value)[0]);
+                       break;
+
+                   case 5:
+                       Byte[] bytes = BitConverter.GetBytes(value);
+                       Array.Reverse(bytes);
+                       stream.Write(bytes, 0, 4);
+                       break;
+                   case 6:
+                       Byte[] bytes2 = BitConverter.GetBytes(value);
+                       Array.Reverse(bytes2);
+                       stream.Write(bytes2, 0, 4);
+                       break;
+               }
+           }
+            return true;
+
         }
 
         private void TB_KeyDown(object sender, KeyEventArgs e)
